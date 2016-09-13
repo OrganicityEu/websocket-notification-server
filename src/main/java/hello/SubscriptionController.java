@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RestController
-public class GreetingController {
+public class SubscriptionController {
     private SimpMessagingTemplate template;
 
     @Autowired
-    public GreetingController(SimpMessagingTemplate template) {
+    public SubscriptionController(SimpMessagingTemplate template) {
         this.template = template;
     }
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
+    public Asset greeting(SubscriptionMessage message) throws Exception {
         Thread.sleep(100); // simulated delay
-        return new Greeting("Hello, " + message.getName() + "!");
+        return new Asset("Hello, " + message.getName() + "!");
     }
 
     @RequestMapping("/notify")
     public String greeting2() throws Exception {
-        this.template.convertAndSend("/topic/greetings",  new Greeting("Hello !"));
+        this.template.convertAndSend("/topic/greetings",  new Asset("Hello !"));
         return "hello";
     }
 }

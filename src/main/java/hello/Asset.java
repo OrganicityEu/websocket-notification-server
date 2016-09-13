@@ -1,13 +1,13 @@
 package hello;
 
-public class Greeting {
+public class Asset {
 
     private String content;
 
-    public Greeting() {
+    public Asset() {
     }
 
-    public Greeting(String content) {
+    public Asset(String content) {
         this.content = content;
     }
 

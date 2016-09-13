@@ -66,12 +66,12 @@ public class GreetingIntegrationTests {
                 session.subscribe("/topic/greetings", new StompFrameHandler() {
                     @Override
                     public Type getPayloadType(StompHeaders headers) {
-                        return Greeting.class;
+                        return Asset.class;
                     }
 
                     @Override
                     public void handleFrame(StompHeaders headers, Object payload) {
-                        Greeting greeting = (Greeting) payload;
+                        Asset greeting = (Asset) payload;
                         try {
                             assertEquals("Hello, Spring!", greeting.getContent());
                         } catch (Throwable t) {
@@ -83,7 +83,7 @@ public class GreetingIntegrationTests {
                     }
                 });
                 try {
-                    session.send("/app/hello", new HelloMessage("Spring"));
+                    session.send("/app/hello", new SubscriptionMessage("Spring"));
                 } catch (Throwable t) {
                     failure.set(t);
                     latch.countDown();
@@ -99,7 +99,7 @@ public class GreetingIntegrationTests {
             }
         }
         else {
-            fail("Greeting not received");
+            fail("Asset not received");
         }
 
     }
